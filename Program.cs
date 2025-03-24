@@ -1,4 +1,8 @@
-﻿namespace SimpleStudentManagementProject_CSharpProject1
+﻿using System.ComponentModel;
+using System.Runtime.Intrinsics.X86;
+using System.Threading.Tasks;
+
+namespace SimpleStudentManagementProject_CSharpProject1
 {
     internal class Program
     {
@@ -10,7 +14,7 @@
         static int StudentCounter = 0;
         static void Main(string[] args)
         {
-            while (true)
+            while (true) //switch statment inside while statment for create mune 
             {
                 Console.Clear();
                 Console.WriteLine("1.Add a new student record ");
@@ -63,29 +67,31 @@
         static void AddStudent()
         {
             char ChoiceChar = 'y';
-            while (StudentCounter < 10)
+            while (StudentCounter < 10) 
+                //ask user for write only 10 students by use while statments 
             {
                 Console.WriteLine($"Enter the name of student {StudentCounter + 1}:");
                 names[StudentCounter] = Console.ReadLine();
 
                 double Mark;
-                do
+                do  // use do-while to check if input is  correct or no 
                 {
                     Console.WriteLine($"Enter the Mark of student {StudentCounter + 1} (0-100): ");
                     Mark = double.Parse(Console.ReadLine());
 
-                    if (Mark < 0 || Mark > 100)
+                    if (Mark < 0 || Mark > 100) // if Statement to check tme mark 
                     {
                         Console.WriteLine("Incorrect Mark format or it not in rang (0-100), please try again.");
 
                     }
                 }
-                while (Mark < 0 || Mark > 100);
+                while (Mark < 0 || Mark > 100); 
                 Console.WriteLine("Mark Entered Successfully!");
                 marks[StudentCounter] = Mark;
 
                 int Age;
                 do
+                // use do-while to check if input is  correct or no 
                 {
                     Console.WriteLine($"Enter the age of student {StudentCounter + 1}: (>21): ");
                     Age = int.Parse(Console.ReadLine());
@@ -107,6 +113,8 @@
                 Console.WriteLine();
                 if (ChoiceChar != 'y' && ChoiceChar != 'Y')
                     break;
+
+
             }
             if (StudentCounter == 11)
                 Console.WriteLine("Cannot add more students. Maximum limit reached.");
@@ -143,7 +151,7 @@
                 Console.WriteLine("Stunent Name :" + names[i] + "\nStudent Age:" + Ages[i] + "\nStudent Mark:" + marks[i] + "\nlogin date:" + dates[i]);
             }
         }
-
+        // use for loop to check if there any recoed inside array and print it
         static void Search()
         {
             Console.WriteLine("Enter the name");
@@ -152,7 +160,7 @@
             bool found = false;
             for (int i = 0; i <= StudentCounter; i++)
             {
-                if (names[i].ToLower() == inputName) ;
+                if (names[i].ToLower() == inputName);
                 {
                     Console.WriteLine("Stunent Name :" + names[i] + "\nStudent Age:" + Ages[i] + "\nStudent Mark:" + marks[i] + "\nlogin date:" + dates[i]);
                     found = true;
@@ -164,8 +172,10 @@
                 }
 
             }
-
-
+            //ask user to waite name for search if its inside the array or no 
+            // use if statment to check if tne name is avalible or no 
+            // use loop statment to check if there are recored with same name and print detailes 
+            
         }
 
         static void findTop()
@@ -181,6 +191,9 @@
 
             }
         }
+        //declere new variable =0 
+        //find the highest mark and save it inside topmark and print all detailes of this student which have highest mark 
+
         static void classAverage()
         {
             if (StudentCounter == 0)
@@ -196,9 +209,10 @@
             double avg = totalMark / StudentCounter;
 
             Console.WriteLine(" average is" + avg);
-
-
         }
+        //decleare variable for caluculate the avarage
+        // loop arry to add all students marks and save it inside totalMark
+        // Calculate average
         static void sort()
         {
             if (StudentCounter == 0)
@@ -238,7 +252,10 @@
                 Console.WriteLine("Stunent Name :" + names[i] + "\nStudent Age:" + Ages[i] + "\nStudent Mark:" + marks[i] + "\nlogin date:" + dates[i]);
             }
         }
-
+        //use loop to sorting students by marks in descreding order 
+        // use flag optimze the sort
+        //use if statment to compare the marks
+        //swap mark ,names,ages and dates
 
         static void deleteStudent()
         {
@@ -264,6 +281,10 @@
             }
         }
     }
+    // deleare new varabile dename 
+    //loop array 
+    //check if dename avalible inside array
+    // shift element to next index
 }
 
         
