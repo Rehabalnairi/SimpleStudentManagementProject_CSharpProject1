@@ -14,110 +14,131 @@ namespace SimpleStudentManagementProject_CSharpProject1
         static int StudentCounter = 0;
         static void Main(string[] args)
         {
-            while (true) //switch statment inside while statment for create mune 
+            try
             {
-                Console.Clear();
-                Console.WriteLine("1.Add a new student record ");
-                Console.WriteLine("2.View all students with formatted output and subject-wise marks.  ");
-                Console.WriteLine("3.Find a student by name ");
-                Console.WriteLine("4.Calculate the class average (rounded to 2 decimals). ");
-                Console.WriteLine("5.Find the top-performing student  ");
-                Console.WriteLine("6.Sort students by marks (highest to lowest)");
-                Console.WriteLine("7.Delete a student record (handle shifting logic).");
-                Console.WriteLine("0.Exit");
-                Console.Write("Enter your choice: ");
 
-                int choice = int.Parse(Console.ReadLine());
 
-                switch (choice)
+
+                while (true) //switch statment inside while statment for create mune 
                 {
-                    case 1:
-                        AddStudent();
-                        break;
+                    Console.Clear();
+                    Console.WriteLine("1.Add a new student record ");
+                    Console.WriteLine("2.View all students with formatted output and subject-wise marks.  ");
+                    Console.WriteLine("3.Find a student by name ");
+                    Console.WriteLine("4.Calculate the class average (rounded to 2 decimals). ");
+                    Console.WriteLine("5.Find the top-performing student  ");
+                    Console.WriteLine("6.Sort students by marks (highest to lowest)");
+                    Console.WriteLine("7.Delete a student record (handle shifting logic).");
+                    Console.WriteLine("0.Exit");
+                    Console.Write("Enter your choice: ");
 
-                    case 2:
-                        ViewStudent();
-                        break;
+                    int choice = int.Parse(Console.ReadLine());
 
-                    case 3:
-                        Search();
-                        break;
-                    case 4:
-                        classAverage();
-                        break;
-                    case 5:
-                        findTop();
-                        break;
-                    case 6:
-                        sort();
-                        break;
-                    case 7:
-                        deleteStudent();
-                        break;
+                    switch (choice)
+                    {
+                        case 1:
+                            AddStudent();
+                            break;
 
-                    case 0: return;
-                    default:
-                        Console.WriteLine("Invalid choice! Try again.");
-                        break;
+                        case 2:
+                            ViewStudent();
+                            break;
+
+                        case 3:
+                            Search();
+                            break;
+                        case 4:
+                            classAverage();
+                            break;
+                        case 5:
+                            findTop();
+                            break;
+                        case 6:
+                            sort();
+                            break;
+                        case 7:
+                            deleteStudent();
+                            break;
+
+                        case 0: return;
+                        default:
+                            Console.WriteLine("Invalid choice! Try again.");
+                            break;
+                    }
+
+                    Console.ReadLine();
                 }
-
-                Console.ReadLine();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
         static void AddStudent()
         {
-            char ChoiceChar = 'y';
-            while (StudentCounter < 10) 
-                //ask user for write only 10 students by use while statments 
+            try
             {
-                Console.WriteLine($"Enter the name of student {StudentCounter + 1}:");
-                names[StudentCounter] = Console.ReadLine();
-
-                double Mark;
-                do  // use do-while to check if input is  correct or no 
+                char ChoiceChar = 'y';
+                while (StudentCounter < 10)
+                //ask user for write only 10 students by use while statments 
                 {
-                    Console.WriteLine($"Enter the Mark of student {StudentCounter + 1} (0-100): ");
-                    Mark = double.Parse(Console.ReadLine());
+                    Console.WriteLine($"Enter the name of student {StudentCounter + 1}:");
+                    names[StudentCounter] = Console.ReadLine();
 
-                    if (Mark < 0 || Mark > 100) // if Statement to check tme mark 
+                    double Mark;
+                    do  // use do-while to check if input is  correct or no 
                     {
-                        Console.WriteLine("Incorrect Mark format or it not in rang (0-100), please try again.");
+                        Console.WriteLine($"Enter the Mark of student {StudentCounter + 1} (0-100): ");
+                        Mark = double.Parse(Console.ReadLine());
 
+                        if (Mark < 0 || Mark > 100) // if Statement to check tme mark 
+                        {
+                            Console.WriteLine("Incorrect Mark format or it not in rang (0-100), please try again.");
+
+                        }
                     }
+
+
+                    while (Mark < 0 || Mark > 100);
+                    Console.WriteLine("Mark Entered Successfully!");
+                    marks[StudentCounter] = Mark;
+
+                    int Age;
+                    do
+                    // use do-while to check if input is  correct or no 
+                    {
+                        Console.WriteLine($"Enter the age of student {StudentCounter + 1}: (>21): ");
+                        Age = int.Parse(Console.ReadLine());
+                        if (Age <= 21)
+                        {
+                            Console.WriteLine("Invalid Age Number format ot it less than 21, please try again.");
+                        }
+
+                    } while (Age <= 21);
+                    Console.WriteLine("Age Entered Successfully!");
+                    Ages[StudentCounter] = Age;
+
+                    dates[StudentCounter] = DateTime.Now;
+                    Console.WriteLine("Student Add Successfully");
+                    StudentCounter++;
+
+                    Console.WriteLine("Do you want add another student information ? y / n");
+                    ChoiceChar = Console.ReadKey().KeyChar;
+                    Console.WriteLine();
+                    if (ChoiceChar != 'y' && ChoiceChar != 'Y')
+                        break;
+
+
                 }
-                while (Mark < 0 || Mark > 100); 
-                Console.WriteLine("Mark Entered Successfully!");
-                marks[StudentCounter] = Mark;
-
-                int Age;
-                do
-                // use do-while to check if input is  correct or no 
-                {
-                    Console.WriteLine($"Enter the age of student {StudentCounter + 1}: (>21): ");
-                    Age = int.Parse(Console.ReadLine());
-                    if (Age <= 21)
-                    {
-                        Console.WriteLine("Invalid Age Number format ot it less than 21, please try again.");
-                    }
-
-                } while (Age <= 21);
-                Console.WriteLine("Age Entered Successfully!");
-                Ages[StudentCounter] = Age;
-
-                dates[StudentCounter] = DateTime.Now;
-                Console.WriteLine("Student Add Successfully");
-                StudentCounter++;
-
-                Console.WriteLine("Do you want add another student information ? y / n");
-                ChoiceChar = Console.ReadKey().KeyChar;
-                Console.WriteLine();
-                if (ChoiceChar != 'y' && ChoiceChar != 'Y')
-                    break;
-
-
+                if (StudentCounter == 11)
+                    Console.WriteLine("Cannot add more students. Maximum limit reached.");
             }
-            if (StudentCounter == 11)
-                Console.WriteLine("Cannot add more students. Maximum limit reached.");
+            catch (Exception e)
+            {
+                Console.WriteLine("chose currect" + e.Message);
+            }
+            Console.WriteLine("after excption handeled");
+            Console.ReadLine(); /// break 
 
         }
             //Console.WriteLine("Enter Details of student");
@@ -196,6 +217,7 @@ namespace SimpleStudentManagementProject_CSharpProject1
 
         static void classAverage()
         {
+
             if (StudentCounter == 0)
             {
                 Console.WriteLine("Add Student first!");
